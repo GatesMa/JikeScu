@@ -1,0 +1,211 @@
+<%- include('header') %>
+
+<!--------------------------------------------------post-content-------------------------------------------->
+
+
+<div>
+    <div class="post-cons">
+        <!-- nav-words -->
+        <div class="post-cons-nav">
+            <a class="nav-words0"><span class="spanclick">推荐</span></a>
+            <a class="nav-words1"><span >关注</span></a>
+            <a class="nav-words2"><span >官方账号</span></a>
+        </div>
+        <!-- 推荐 -->
+        <div class="tuijian">
+            <% posts.forEach(function(post){ %>
+                <%- include('components/post-item', {post: post})%>
+            <% }) %>
+        </div>
+        <!-- 关注 -->
+        <div class="guanzhu hidedisplay">
+            <div class="ui middle aligned animated list relaxed selection">
+                <%if(user && followers.length > 0) {%>
+                    <% followers.forEach(function(account){ %>   
+                        <div class="item">
+                            <img class="ui avatar image" src="/img/<%= account.avatar %>">
+                            <div class="content">
+                                <div class="header"><a href="/posts?author=<%= account._id %>"><%= account.name %></a></div>
+                                <div class="description"><a href="/posts?author=<%= account._id %>"><%= account.bio %></a></div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <%} %> 
+               
+                <% if(user && followers.length == 0) {%>
+                    <div class="item">
+                        暂无关注的人，快去关注一些吧！
+                    </div>
+                <%}%>
+    
+                
+            </div>
+        </div>
+       <!-- 分类 官方账号 -->
+        <div class="fenlei hidedisplay">
+            <div class="ui middle aligned animated list relaxed selection">
+                
+                <% officialAcounts.forEach(function(account){ %>   
+                    <div class="item">
+                        <img class="ui avatar image" src="/img/<%= account.avatar %>">
+                        <div class="content">
+                            <div class="header"><a href="/posts?author=<%= account._id %>"><%= account.name %></a></div>
+                            <div class="description"><a href="/posts?author=<%= account._id %>"><%= account.bio %></a></div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!--------------------------------------------------sidebar-------------------------------------------->
+    
+    
+    <% if (!isPerson) {%>
+        <div class="post-sidebar">
+    
+            <!------------------------card1------------------------->
+        
+            <div class="nav-card1">
+                <div class="nav-card1-item">
+                    <i class="icon large pencil alternate outline"></i>
+                    <a href="/posts/create"><span>写文章</span></a>
+                </div>
+                <div class="nav-card1-item">
+                    <i class="icon large cart arrow down"></i>
+                    <span>逛商场</span>
+                </div>
+                <div class="nav-card1-item">
+                    <i class="icon large share"></i>
+                    <span>趣分享</span>
+                </div>
+            </div>
+            <!------------------------card2------------------------->
+        
+            <div class="nav-card2">
+                <div class="nav-card2-item">
+                    <i class="icon big star half outline yellow"></i>
+                    <span>我的收藏</span>
+                </div>
+                <div class="nav-card2-item">
+                    <i class="icon big book green"></i>
+                    <span>我的商店</span>
+                </div>
+                <div class="nav-card2-item">
+                    <i class="icon big server blue"></i>
+                    <span><a style="color:#444" class="wdgz">我的关注</a></span>
+                </div>
+                <div class="nav-card2-item">
+                    <i class="icon big paint brush blue"></i>
+                    <span>
+                        <% if(userId == 0) {%>
+                            <a href="/signin" style="color:#444">我的消息</a>
+                        <%} else {%>
+                            <a href="/posts?author=<%= userId %>" style="color:#444">我的消息</a>
+                        <% } %>
+                    </span> <!---->
+                </div>
+                <div class="nav-card2-item">
+                    <i class="icon big yen sign blue"></i>
+                    <span>付费咨询</span>
+                </div>    
+            </div>
+            <!------------------------card3------------------------->
+        
+            <div class="nav-card3">
+                <a href="http://jwc.scu.edu.cn//article/197/197_1.htm" target="_blank">
+                    <img style="width:296px" src="http://jwc.scu.edu.cn/images/party.png"  alt="广告">
+                </a>
+            </div>
+            <!------------------------card4------------------------->
+        
+            <div class="nav-card4">
+                <span>四川大学计算机学院2017级行政二班</span>
+                <span style="border-bottom: 1px solid #f0f2f7;padding-bottom: 4px">马龙 · 祝生乾 · 吴朝 · 杨明月</span>
+                
+                <span>违法和不良信息举报：110</span>
+                <a href="#nowhere" class="license"><span>电信与服务业务经营许可证</span></a>
+                <a href="#nowhere" class="license"><span style="border-bottom: 1px solid #f0f2f7;padding-bottom: 4px">网络文化经营许可证</span></a>
+                
+                <a href="" class="contact"><span>联系我们</span></a>
+                <span> © 2019 即刻川大</span>
+            </div>
+        </div>
+        
+    <% } else {%>
+        <div class="personalInfo">
+            <div class="avatar">
+                <img class="avatar-img" src="/img/<%= authorInfo.avatar %>">
+            </div>
+            
+            <div class="item" style="border-right:1px solid #999">
+                <span style="display:block;width:98px;height:25px;color:black;font-weight: bold;">文章</span>
+                <span><%= perPostCont%></span>
+            </div>
+            <div class="item" style="border-right:1px solid #999">
+                <span style="display:block;width:98px;height:25px;color:black;font-weight: bold;">关注</span>
+                <span><%= perFansCont%></span>
+            </div>
+            <div class="item">
+                <span style="display:block;width:98px;height:25px;color:black;font-weight: bold;">粉丝</span>
+                <span><%= perFollowCont%></span>
+            </div>
+            <div class="profile">
+                <span style="color:coral;font-size:16px;">简介: &nbsp;&nbsp;&nbsp;</span>
+                <%= authorInfo.bio %>
+            </div>
+        </div>
+    <% } %>
+    <div style="clear:both;"></div>
+</div>
+
+
+
+<!------------------------Javascript------------------------->
+
+<script>
+    $('.nav-card4 a.license').click(function() {
+        alert('对不起,没有许可证');
+    });
+    $('.nav-card4 a.contact').click(function() {
+        alert('联系QQ：1353934265');
+    });
+
+
+    //导航文字
+
+    $('.post-cons .nav-words0').click(function() {
+        $('.tuijian').removeClass("hidedisplay");
+        $('.guanzhu').addClass("hidedisplay");
+        $('.fenlei').addClass("hidedisplay");
+
+        $('.post-cons .nav-words0 span').addClass("spanclick");
+        $('.post-cons .nav-words1 span').removeClass("spanclick");
+        $('.post-cons .nav-words2 span').removeClass("spanclick");
+    });
+    $('.post-cons .nav-words1').click(function() {
+        $('.tuijian').addClass("hidedisplay");
+        $('.guanzhu').removeClass("hidedisplay");
+        $('.fenlei').addClass("hidedisplay");
+
+        $('.post-cons .nav-words0 span').removeClass("spanclick");
+        $('.post-cons .nav-words1 span').addClass("spanclick");
+        $('.post-cons .nav-words2 span').removeClass("spanclick");
+    });
+    $('.post-cons .nav-words2').click(function() {
+        $('.tuijian').addClass("hidedisplay");
+        $('.guanzhu').addClass("hidedisplay");
+        $('.fenlei').removeClass("hidedisplay");
+
+        $('.post-cons .nav-words0 span').removeClass("spanclick");
+        $('.post-cons .nav-words1 span').removeClass("spanclick");
+        $('.post-cons .nav-words2 span').addClass("spanclick");
+    });
+    $('.nav-card2-item span a.wdgz').click(function(){
+        $('.post-cons .nav-words1').click()
+    }) 
+</script>
+<%- include('footer') %>

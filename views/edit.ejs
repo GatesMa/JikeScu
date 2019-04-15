@@ -1,0 +1,39 @@
+<%- include('header')%>
+
+<div class="ui grid">
+
+    <div class="four wide column">
+        <a  href="/posts?author=<%= user._id%>"
+            class="avatar avatar-link"
+            >
+            <img src="/img/<%= user.avatar %>" alt="" class="avatar" style="float:right">
+        </a>
+    </div>
+
+    <div class="eight wide column">
+
+        <!-- do something-->
+        <form class="ui form segment" method="POST" action="/posts/<%= post._id%>/edit">
+            <div class="field required">
+                <label for="">标题</label>
+                <input type="text" name="title" value="<%= post.title%>">
+            </div>
+
+            <div class="field required">
+                <label for="">概要</label>
+                <textarea name="profile" id=""  rows="4"><%= post.profile%></textarea>
+            </div>
+
+            <div class="field required">
+                <label for="">内容</label>
+                <span style="color:#999;font-size:10px;float:right">支持markdown语法</span>
+                <textarea name="content"  rows="15"><%= post.content%></textarea>
+
+            </div>
+            <input type="submit" class="ui button" value="发布">
+        </form>
+    </div>
+
+</div>
+
+<%- include('footer')%>

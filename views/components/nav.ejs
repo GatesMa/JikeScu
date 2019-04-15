@@ -1,0 +1,41 @@
+<div class="nav">
+    <div class="ui grid">
+        <div class="four wide column"></div>
+
+        <div class="eight wide column">
+            <span class="title"><%= blog.title %></span>
+            <a href="/posts" ><span class="market">资讯社区</span></a>
+            <a href="#nowhere" ><span class="market">二手商城</span></a>
+            <a href="#nowhere" ><span class="market">更多模块升级中</span></a>
+        </div>
+
+
+        <div class="nav-setting" style="float:right">
+            <div class="ui buttons">
+                <div class="ui floating dropdown button">
+                    
+                    <div class="info-avatar">
+                        <%if(user) {%>
+                            <img class="nav_avatar" src="/img/<%= user.avatar %>" style="display:inline-block">
+                        <%} else {%>
+                            <span style="color:black;margin-right:20px">未登录</span>
+                        <% }%>
+                    </div>
+                    <!-- <i class="icon bars"></i> -->
+                    <div class="menu">
+        
+                        <% if(user) {%>
+                            <a href="/posts?author=<%= user._id %>" class="item">个人主页</a>
+                            <div class="divider"></div>
+                            <a href="/posts/create" class="item">发表文章</a>
+                            <a href="/signout" class="item">登出</a>
+                        <% } else {%>
+                            <a href="/signin" class="item">登陆</a>
+                            <a href="/signup" class="item">注册</a> 
+                        <% }%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

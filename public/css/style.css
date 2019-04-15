@@ -1,0 +1,140 @@
+/* ---------- 全局样式 ---------- */
+
+body {
+    /* width: 1100px; */
+    height: 100%;
+    margin: 0 auto;/* 居中*/
+    /* padding-top: 40px; */
+    background-color: #f6f6f6;
+}
+a:hover {
+    color: #0084FF;
+}
+
+
+.button {
+    background-color: rgb(62, 191, 214) !important;
+    color: #fff !important;
+}
+
+.avatar {
+    border-radius: 3px;
+    width: 48px;
+    height: 48px;
+    /* float: right; */
+    
+    
+}
+
+/* ---------- nav ---------- */
+
+.nav {
+    position: relative;
+    margin-bottom: 5px;
+    color: #999;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+    /* border: 1px solid blue; */
+    
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+
+/* 即刻川大 */
+.nav .title {
+    position: relative;
+    left: -300px;
+    color: #0084FF;/*rgb(62, 191, 214)*/
+    display: inline-block;
+    margin: 10px 0;
+    font-size: 25px;
+
+
+
+    top: -20px;
+}
+
+.nav .nav_avatar {
+    border-radius: 3px;
+    width: 48px;
+    height: 48px;
+    position: relative;
+    top: -15px;
+    left: -20px;
+    display: inline-block;
+}
+
+/* 二手商场 */
+.nav .market {
+    position: relative;
+    left: -300px;
+
+    display:inline-block;
+    margin-left:40px;
+    
+    color: #999;
+
+    font-size: 16px;
+    top: -22px;
+}
+.nav span.market:hover {
+    border-bottom: 3px solid rgb(62, 191, 214);
+}
+
+
+
+/* ---------- nav-setting ---------- */
+
+.nav-setting {
+    
+    position: relative;
+
+    top: 30px;
+    left: 140px;
+    z-index: 999;
+}
+
+.nav-setting .ui.dropdown.button {
+    padding: 0px 10px 0 10px;
+    background-color: #fff !important;
+    
+}
+
+/* .nav-setting .icon.bars {
+    color: #000;
+    font-size: 18px;
+    float: right;
+    right: 20px;
+    position: relative;
+} */
+
+.nav .info-avatar {
+    float: right;
+    position: relative;
+    top: 8px;
+}
+
+/* ---------- post-content ---------- */
+
+.post-content h3 a {
+    color: rgb(62, 191, 214) !important;
+}
+
+.post-content .tag {
+    font-size: 13px;
+    margin-right: 5px;
+    color: #999;
+}
+
+.post-content .tag.right {
+    float: right;
+    margin-right: 0;
+}
+
+.post-content .tag.right a {
+    color: #999;
+}
+
+

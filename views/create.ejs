@@ -1,0 +1,44 @@
+<%- include('header')%>
+
+<div class="ui grid">
+
+    <div class="four wide column">
+        <a  href="/posts?author=<%= user._id%>"
+            class="avatar avatar-link"
+            data-title="<%= user.name%> | <%= ({m: '男', f: '女', x: '保密'})[user.gender] %>"
+            data-content="<$= user.bio %>"
+            >
+            <img src="/img/<%= user.avatar %>" alt="" class="avatar" style="float:right">
+        </a>
+    </div>
+
+    <div class="eight wide column">
+        <form class="ui form segment" method="POST" enctype="multipart/form-data">
+            <div class="field required">
+                <label for="">标题</label>
+                <input type="text" name="title">
+            </div>
+
+            <div class="field required">
+                <label for="">概要</label>
+                <textarea name="profile" id=""  rows="4"></textarea>
+            </div>
+
+            <div class="field required">
+                <label for="">主页展示图片</label>
+                <input type="file" name="avatar">
+            </div>
+
+            <div class="field required">
+                <label for="">内容</label>
+                <span style="color:#999;font-size:10px;float:right">支持markdown语法</span>
+                <textarea name="content" id=""  rows="15"></textarea>
+            </div>
+            
+            <input type="submit" class="ui button" value="发布">
+        </form>
+    </div>
+
+</div>
+
+<%- include('footer')%>

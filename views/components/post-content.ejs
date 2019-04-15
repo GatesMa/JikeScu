@@ -1,0 +1,99 @@
+<div class="post-content">
+	<div class="ui grid">
+		<div class="four wide column">
+			<a class="avatar avatar-link"
+				style="float:right;margin-top:10px"
+				href="/posts?author=<%= post.author._id %>"
+				data-title="<%= post.author.name %> | <%= ({m: '男', f: '女', x: '保密'})[post.author.gender] %>"
+				data-content="<%= post.author.bio %>">
+				<img class="avatar" src="/img/<%= post.author.avatar %>">
+			</a>
+			
+		</div>
+	
+		<div class="eight wide column">
+			<div class="ui segment">
+				<div style="height:60px;text-align:center;line-height:60px;border-bottom: 1px solid #999;margin-bottom: 10px">
+					<h3><a href="/posts/<%= post._id %>" style="float:left"><%= post.title %></a></h3>
+					<!-- 关注 -->
+					<% if(user && user._id.toString() != post.author._id.toString()  && !isFollow) {%>
+						<div class="ui labeled button" tabindex="0" style="float:right;">
+							<div class="ui red button">
+							<i class="heart icon"></i><a href="/posts/<%= post.author._id %>/follow">关注</a>
+							</div>
+							<a class="ui basic red left pointing label">
+								<%= followedCount%>
+							</a>
+						</div>
+					<% } %>
+					<!-- 取消关注 -->
+					<% if(user && user._id.toString() != post.author._id.toString()  && isFollow) { %>
+						<div class="ui labeled button" tabindex="0" style="float:right;">
+							<div class="ui red button">
+							<i class="heart icon"></i><a href="/posts/<%= post.author._id %>/dropfollow">取消关注</a>
+							</div>
+							<a class="ui basic red left pointing label">
+								<%= followedCount%>
+							</a>
+						</div>
+					<% } %>
+
+
+
+					<!-- 点赞数 -->
+					<% if(user && user._id.toString() != post.author._id.toString() && !isLiked) { %>
+						<div class="ui labeled button" tabindex="0" style="float:right;">
+							<div class="ui basic blue button">
+								<i class="fork icon"></i> <a href="/posts/<%= post._id %>/liked">点赞</a>
+							</div>
+							<a class="ui basic left pointing blue label">
+								<%= likedCount%>
+							</a>
+						</div>
+					<% } %>
+					<% if(user && user._id.toString() != post.author._id.toString() && isLiked) { %>
+						<div class="ui labeled button" tabindex="0" style="float:right;">
+							<div class="ui basic blue button">
+								<i class="fork icon"></i>已点赞
+							</div>
+							<a class="ui basic left pointing blue label">
+								<%= likedCount%>
+							</a>
+						</div>
+					<% } %>
+				</div>
+				<%- post.content %> <!--html字串-->
+				<div>
+					<span class="tag"><%= post.created_at %></span>
+					<span class="tag right">
+						<!-- <% if(user && user._id.toString() != post.author._id.toString()  && !isFollow) {%>
+							<a style="width:80px;height:40px;color:cornflowerblue;font-size:13px;cursor: pointer;">
+								关注此人
+							</a>
+						<% } %>
+						<% if(user && user._id.toString() != post.author._id.toString()   && isFollow) { %>
+							<a style="width:80px;height:40px;font-size:13px;cursor: pointer;color:">
+								已关注
+							</a>
+						<% } %> -->
+						
+						<span>浏览(<%= post.pv || 0 %>)</span>
+						<span>留言(<%= post.commentsCount || 0 %>)</span>
+			
+						<% if (user && post.author._id && user._id.toString() === post.author._id.toString()) { %>
+						<div class="ui inline dropdown">
+							<div class="text"></div>
+							<i class="dropdown icon"></i>
+							<div class="menu">
+							<div class="item"><a href="/posts/<%= post._id %>/edit">编辑</a></div>
+							<div class="item"><a href="/posts/<%= post._id %>/remove">删除</a></div>
+							</div>
+						</div>
+						<% } %>
+			
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

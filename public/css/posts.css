@@ -1,0 +1,227 @@
+
+
+/* ----------.post-cons-nav ----------*/
+.post-cons-nav {
+    width: 750px;
+    background-color: #fff;
+    height: 58px;
+    border-bottom: 1px solid #f0f2f7;
+}
+
+/* 点击后 */
+.spanclick {
+    font-weight: bold;
+    border-bottom: 2px solid #0084FF;
+}
+.hidedisplay {
+    display: none;
+}
+
+
+.post-cons-nav span {
+    display: block;
+    float:left;
+    
+    height: 58px;
+    width: 72px;
+    line-height: 58px;
+    text-align: center;
+    font-size: 16px;
+    color: #000;
+    cursor: pointer;
+}
+/* .post-cons-nav span:hover {
+    
+} */
+.item .content a{
+    color: rgba(0,0,0,.87);;
+}
+.item .content .header a:hover {
+    color: #0084FF;
+}
+/* ----------.post-cons -------------*/
+.post-cons {
+    float: left;
+    width: 750px;
+    background-color: #fff;
+    padding-top: 10px;
+    margin-left: 180px;
+    margin-top: 10px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+.post-item {
+    height: 250px;
+    
+    /* padding: 25px; */
+    padding: 10px 0px 10px 0px;
+    
+    border-bottom: 1px solid #f0f2f7;
+    word-wrap: break-word;
+    white-space: normal;
+    word-break:break-all;  
+}
+.post-item .avatar {
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.post-item .post-item-footer .tag {
+    color: #999;
+    margin: 0px 5px 0px 5px;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+.post-item .post-item-footer .right {
+    float: right;
+}
+.post-item .post-item-content {
+    margin-right: 10px;
+}
+.post-item .post-item-home_img {
+    margin-right: 20px;
+}
+
+/* post-sidebar */
+.post-sidebar {
+    width: 296px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* -------------card1 -------------------*/
+
+.post-sidebar .nav-card1{
+    height: 98px;
+    /* border: 1px solid #999; */
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+.nav-card1 .nav-card1-item {
+    float:left;
+    width:98px;
+    height:98px;
+    
+}
+.nav-card1-item i {
+    height: 49px;
+    text-align: center;
+    padding-top: 30px;
+    padding-left: 40px;
+    display: block;
+    cursor: pointer;
+}
+.nav-card1-item span {
+    color: #444;
+    font-size: 16px;
+    padding-left: 25px;
+    display: block;
+    padding-top: 10px;
+    cursor: pointer;
+}
+.nav-card1-item span:hover {
+    color: #175199;
+}
+
+/* -------------card2 -------------------*/
+
+.post-sidebar .nav-card2{
+    height: 177px;
+    /* border: 1px solid #999; */
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+.nav-card2-item {
+    float: left;
+    width: 98px;
+    height: 98px;
+}
+.nav-card2-item i {
+    display: inline-block;
+    width: 98px;
+    height: 49px;
+    padding-top: 15px;
+    cursor: pointer;
+}
+.nav-card2-item span {
+    color: #444;
+    font-size: 16px;
+    padding-left: 20px;
+    display: block;
+    cursor: pointer;
+}
+
+/* -------------card3-------------------*/
+.post-sidebar .nav-card3{
+    height: 170px;
+    /* border: 1px solid #999; */
+    margin-bottom: 10px;
+    /* padding-top: -10px; */
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+/* -------------card4-------------------*/
+.post-sidebar .nav-card4{
+    height: 200px;
+    /* border: 1px solid #999; */
+    margin-bottom: 10px;
+    
+    
+}
+.nav-card4 a {
+    text-decoration: none;
+}
+.post-sidebar .nav-card4 a span:hover{
+    color: #175199 !important;
+}
+.nav-card4 span {
+    color: #8590A6;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.personalInfo {
+    width: 296px;
+    height: 250px;
+    /* border: 1px solid #999; */
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.personalInfo .avatar {
+    float: left;
+    height: 80px;
+    width: 296px;
+    /* border: 1px solid #999; */
+    line-height: 80px;
+    text-align: center;
+    border-bottom: 1px solid #999;
+}
+.personalInfo .avatar .avatar-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-top: 15px;
+}
+.personalInfo .item {
+    float: left;
+    width: 98px;
+    height: 80px;
+    /* border: 1px solid #999; */
+    line-height: 80px;
+    text-align: center
+    
+}
+.personalInfo .profile {
+    float: left;
+    width: 296px;
+    height: 70px;
+    border-top: 1px solid #999;
+    padding: 5px 5px 5px 10px;
+}
