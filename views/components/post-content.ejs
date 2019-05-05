@@ -14,7 +14,12 @@
 		<div class="eight wide column">
 			<div class="ui segment">
 				<div style="height:60px;text-align:center;line-height:60px;border-bottom: 1px solid #999;margin-bottom: 10px">
-					<h3><a href="/posts/<%= post._id %>" style="float:left"><%= post.title %></a></h3>
+					<% if(post.title.length >= 20) { %>
+						<h3><a href="/posts/<%= post._id %>" style="float:left" title="<%= post.title %>"><%= post.title.slice(0, 20) + "..." %></a></h3>
+					<% } else { %>
+						<h3><a href="/posts/<%= post._id %>" style="float:left" title="<%= post.title %>"><%= post.title %></a></h3>
+					<% } %>
+
 					<!-- 关注 -->
 					<% if(user && user._id.toString() != post.author._id.toString()  && !isFollow) {%>
 						<div class="ui labeled button" tabindex="0" style="float:right;">

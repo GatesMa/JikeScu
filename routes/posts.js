@@ -159,7 +159,13 @@ PostModel.getPostById(postId)
 	}
 	post = pos
 
-	FollowModel.getIsFollowed(req.session.user._id, post.author._id)
+	if(user == null) {
+		user = {}
+		user._id = 0
+	}
+	userId = user._id
+
+	FollowModel.getIsFollowed(userId, post.author._id)
 		.then(function(result) {
 		if(result) {
 			isFollow = true
@@ -168,9 +174,9 @@ PostModel.getPostById(postId)
 		}
 		
 		console.log(isFollow)
-		FollowModel.getFollowedCountByFanId(req.session.user._id)
+		FollowModel.getFollowedCountByFanId(userId)
 			.then(function(num){
-			LikedModel.getIsLikedById(post._id, req.session.user._id)
+			LikedModel.getIsLikedById(post._id, userId)
 				.then(function(result2) {
 				if(result2) {
 					isLiked = true
