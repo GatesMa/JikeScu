@@ -4,7 +4,8 @@
 			<a class="avatar avatar-link"
 				style="float:right;margin-top:10px"
 				href="/posts?author=<%= post.author._id %>"
-				data-title="<%= post.author.name %> | <%= ({m: '男', f: '女', x: '保密'})[post.author.gender] %>"
+				
+				data-title="<%= post.author.name %> | <%= post.author.acade %>"
 				data-content="<%= post.author.bio %>">
 				<img class="avatar" src="/img/<%= post.author.avatar %>">
 			</a>
@@ -71,7 +72,13 @@
 						</div>
 					<% } %>
 				</div>
-				<%- post.content %> <!--html字串-->
+
+				<% if(post.rawHtmlContent != '') { %>
+					<%- post.rawHtmlContent %>
+				<%} else { %>
+					<%- post.content %> <!--html字串-->
+				<%}%>
+
 				<div>
 					<span class="tag"><%= post.created_at %></span>
 					<span class="tag right">

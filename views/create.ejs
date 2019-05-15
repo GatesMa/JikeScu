@@ -5,7 +5,7 @@
     <div class="four wide column">
         <a  href="/posts?author=<%= user._id%>"
             class="avatar avatar-link"
-            data-title="<%= user.name%> | <%= ({m: '男', f: '女', x: '保密'})[user.gender] %>"
+            data-title="<%= user.name%> | <%= user.acade %>"
             data-content="<$= user.bio %>"
             >
             <img src="/img/<%= user.avatar %>" alt="" class="avatar" style="float:right">

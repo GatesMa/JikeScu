@@ -20,6 +20,12 @@ router.get('/', function (req, res, next) {
 	perPostCont = 0 	//个人用户文章数目
 	perFollowCont = 0 //个人用户粉丝数
 	perFansCont = 0  //关注了多少人
+	pageCount = 5 //一页5篇文章
+	page = req.query.page //页码
+	postsCont = 0 //文章数
+
+	start = 0
+	end = 10
 	
 	if(author) {
 		UserModel.getUserById(author)
@@ -49,6 +55,33 @@ router.get('/', function (req, res, next) {
 		author = null
 		isPerson = false
 	}
+
+
+	console.log('----------------------------------------------------------------------')
+	PostModel.getPostsCount(author)
+		.then(function(res){
+			postsCont = res
+			if(page && page >=0 && page <= (res/5)) {
+				if(page == res/5) {
+					start = page*5
+					end = res
+				} else {
+					start = page*5
+					end = start+5
+				}
+			} else {
+				page = 0
+				start = 0
+				end = 5
+			} 
+			
+		})
+	
+	console.log('----------------------------------------------------------------------')
+	
+
+	author = req.query.author  //个人用户ID
+	
 	user = req.session.user
 	if(user == null) {
 		user = {}
@@ -67,21 +100,24 @@ router.get('/', function (req, res, next) {
 				})
 				.catch(next)
 			}
-			PostModel.getPosts(author)
-			.then(function(posts){
-				res.render('posts', {
-					posts: posts,
-					officialAcounts: accounts,
-					followers: arrayObj,
-					isPerson: isPerson,
-					authorInfo: authorInfo,
-					perPostCont: perPostCont,
-					perFollowCont: perFollowCont,
-					perFansCont: perFansCont,
-					userId: userId
+			PostModel.getPosts(author, start, end)
+				.then(function(posts){
+					res.render('posts', {
+						posts: posts,
+						officialAcounts: accounts,
+						followers: arrayObj,
+						isPerson: isPerson,
+						authorInfo: authorInfo,
+						perPostCont: perPostCont,
+						perFollowCont: perFollowCont,
+						perFansCont: perFansCont,
+						userId: userId,
+						page: page,
+						author: author,
+						postsCont: postsCont
+					})
 				})
-			})
-			.catch(next)
+				.catch(next)
 		})
 		.catch(next)
 	})
@@ -140,64 +176,66 @@ router.post('/create', checkLogin, function (req, res, next) {
 
 // GET /posts/create 发表文章页
 router.get('/create', checkLogin, function (req, res, next) {
-res.render('create')
+	res.render('create')
 })
 
 // GET /posts/:postId 单独一篇的文章页
 router.get('/:postId', function (req, res, next) {
-console.log("-----------------")
-const postId = req.params.postId
-post = {}
-comments = {}
-isFollow = false
+	console.log("-----------------")
+	const postId = req.params.postId
+	post = {}
+	comments = {}
+	isFollow = false
 
 
-PostModel.getPostById(postId)
-	.then(function (pos) {
-	if (!pos) {
-		throw new Error('该文章不存在')
-	}
-	post = pos
-
-	if(user == null) {
-		user = {}
-		user._id = 0
-	}
-	userId = user._id
-
-	FollowModel.getIsFollowed(userId, post.author._id)
-		.then(function(result) {
-		if(result) {
-			isFollow = true
-		} else {
-			isFollow = false
+	PostModel.getPostById(postId)
+		.then(function (pos) {
+		if (!pos) {
+			throw new Error('该文章不存在')
 		}
-		
-		console.log(isFollow)
-		FollowModel.getFollowedCountByFanId(userId)
-			.then(function(num){
-			LikedModel.getIsLikedById(post._id, userId)
-				.then(function(result2) {
-				if(result2) {
-					isLiked = true
-				} else {
-					isLiked = false
-				}
-				LikedModel.getLikedCount(post._id)
-					.then(function(likedCount){
-					PostModel.incPv(post._id)
-						.then(function(){
-						CommentModel.getComments(postId)
-							.then(function(comment){
-							comments = comment
-							res.render('post', {
-								post: post,
-								comments: comments,
-								isFollow: isFollow,
-								followedCount: num,
-								isLiked: isLiked,
-								likedCount: likedCount
-							})
+		post = pos
+
+		if(user == null) {
+			user = {}
+			user._id = 0
+		}
+		userId = user._id
+
+		FollowModel.getIsFollowed(userId, post.author._id)
+			.then(function(result) {
+			if(result) {
+				isFollow = true
+			} else {
+				isFollow = false
+			}
+			
+			console.log(isFollow)
+			FollowModel.getFollowedCountByFanId(userId)
+				.then(function(num){
+				LikedModel.getIsLikedById(post._id, userId)
+					.then(function(result2) {
+					if(result2) {
+						isLiked = true
+					} else {
+						isLiked = false
+					}
+					LikedModel.getLikedCount(post._id)
+						.then(function(likedCount){
+						PostModel.incPv(post._id)
+							.then(function(){
+							CommentModel.getComments(postId)
+								.then(function(comment){
+								comments = comment
+								res.render('post', {
+									post: post,
+									comments: comments,
+									isFollow: isFollow,
+									followedCount: num,
+									isLiked: isLiked,
+									likedCount: likedCount
+								})
+								})
+								.catch(next)
 							})
 							.catch(next)
 						})
@@ -210,8 +248,6 @@ PostModel.getPostById(postId)
 			.catch(next)
 		})
 		.catch(next)
-	})
-	.catch(next)
 })
 
 // GET /posts/:postId/edit 更新文章页

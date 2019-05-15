@@ -18,12 +18,18 @@
                 <input type="password" name="repassword" placeholder="重复密码">
             </div>
             <div class="field required">
-                <label>性别</label>
-                <select name="gender" class="ui compact selection dropdown">
-                    <option value="m">男</option>
-                    <option value="f">女</option>
-                    <option value="x">保密</option>
+                <label>学院</label>
+                <select name="acade" class="ui compact selection dropdown">
+                    
+                    <% for(var i in academy){ %>
+                        <option value="<%= academy[i] %>"><%= academy[i] %></option>
+                    <%}%>
+                    
                 </select>
+            </div>
+            <div class="field required">
+                <label>学号</label>
+                <input type="text" name="stuId" maxlength="13" />
             </div>
             <div class="field required">
                 <label>头像</label>

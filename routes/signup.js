@@ -9,25 +9,31 @@ const checkNotLogin = require('../middlewares/check').checkNotLogin
 
 // GET /signup 注册页
 router.get('/', checkNotLogin, function(req, res, next) {
-    res.render('signup')
+    
+    var array = ['计算机学院', '材料科学与工程学院', '电气信息学院', '电子信息学院', '法学院','高分子科学与工程学院',
+                '公共管理学院', '华西公共卫生学院', '华西口腔医学院', '华西临床医学院', '华西药学院', '化学学院',
+                '化学工程学院', '建筑与环境学院', '经济学院', '匹兹堡学院', '历史文化学院　（旅游学院）', '轻纺与食品学院',
+                '软件学院', '商学院', '生命科学学院', '数学学院', '水利水电学院', '外国语学院', '文学与新闻学院', '物理科学与技术学院',
+                '艺术学院', '制造科学与工程学院']
+
+    res.render('signup', {
+        academy: array
+    })
 })
 
 // POST /signup 用户注册
 router.post('/', checkNotLogin, function(req, res, next) {
     const name = req.fields.name
-    const gender = req.fields.gender
+    const acade = req.fields.acade
     const bio = req.fields.bio
     const avatar = req.files.avatar.path.split(path.sep).pop()
     let password = req.fields.password
     const repassword = req.fields.repassword
-
+    const stuId = req.fields.stuId
     //校验参数
     try {
         if(!(name.length >= 1 && name.length <= 10)) {
             throw new Error('名字限制在1-10个字符')
-        }
-        if(['m', 'f', 'x'].indexOf(gender) === -1) {
-            throw new Error('性别只能是 m、f、x')
         }
         if(!(bio.length >= 1 && bio.length <= 30)) {
             throw new Error('个人简介限制在1-30个字符')
@@ -40,6 +46,9 @@ router.post('/', checkNotLogin, function(req, res, next) {
         }
         if(password !== repassword) {
             throw new Error('两次输入的密码不一致')
+        }
+        if(stuId.length != 13) {
+            throw new Error('输入正确的学号')
         }
     } catch (e) {
         // 注册失败，异步删除上传的头像
@@ -57,10 +66,11 @@ router.post('/', checkNotLogin, function(req, res, next) {
     let user = {
         name: name,
         password: password,
-        gender: gender,
+        acade: acade,
         bio: bio,
         avatar: avatar,
-        OfficialAccount: false
+        OfficialAccount: false,
+        stuId: stuId
     }
 
     //用户信息写入数据库

@@ -1,0 +1,104 @@
+<%- include('header1') %>
+
+
+<div style="width:1000px;margin:0 auto;margin-top:70px;">
+    
+    <div class="lunbotu" style="width:400px;margin-top:70px">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                
+                <%for(var i = 0;i < images.length;i++) {%>
+                    <li data-target="#carousel-example-generic" data-slide-to="<%= i%>"></li>
+                <%}%>
+            </ol>
+        
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="/img/<%= item.image %>" >
+                </div>
+                
+                <% images.forEach(function (img) { %>
+                    <div class="item">
+                        <img src="/img/<%= img.image %>" >
+                    </div>
+                <% }) %>
+            </div>
+        
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            
+            </a>
+        </div>
+    </div>
+    
+        
+    <div class="infoInimgAndInfo" >
+        <div class="productTitle" >
+            <%= item.name %>
+        </div>
+        <div class="productSubTitle">
+                <%= item.subTitle %>
+        </div>
+        
+        <div class="productPrice">
+            <div class="juhuasuan">
+                <span class="juhuasuanBig">即刻川大</span>
+                <span>此商品获得保障，<span class="juhuasuanTime">可以放心</span>交易</span>
+                <% if (user && item.author._id && user._id.toString() === item.author._id.toString()) { %>
+                    <a class="btn btn-primary" href="/market/<%= item._id%>/edit" style="float:right;margin-top: 3px">修改商品</a>
+                
+                    <a class="btn btn-primary" href="/market/<%= item._id%>/remove" style="float:right;margin-top: 3px">删除商品</a>
+                <%}%>
+            </div>
+            <div class="productPriceDiv">
+                <div class="gouwujuanDiv"><img height="40px" src="/img/<%= item.author.avatar %>">
+                <div>
+                    <span>商品分类：</span><span class="redColor boldWord"><%= item.category%></span>
+                </div>
+                </div>
+                <div class="originalDiv">
+                    <span class="originalPriceDesc"></span>
+                    <span class="originalPriceYuan"></span>
+                    <span class="originalPrice">
+                        
+                    </span>
+                </div>
+                <div class="promotionDiv">
+                    <span class="promotionPriceDesc">价格 </span>
+                    <span class="promotionPriceYuan">¥</span>
+                    <span class="promotionPrice">
+                        <%= item.price %>
+                    </span>              
+                </div>
+            </div>
+        </div>
+        <div class="productSaleAndReviewNumber">
+            <div>卖家QQ： <span class="redColor boldWord"> <%= item.qq%></span></div>   
+            <div>商品浏览量：<span class="redColor boldWord"> <%= item.pv%></span></div> 
+        </div>
+        <div class="productNumber">
+            <span>库存：</span><span class="promotionPrice"><%= item.stock%></span>
+        </div>
+        <div class="serviceCommitment">
+            <span class="serviceCommitmentDesc">服务承诺</span>
+            <span class="serviceCommitmentLink">
+                <a href="#nowhere">正品保证</a>
+                <a href="#nowhere">校内免运费</a>
+                <a href="#nowhere">七天无理由退换</a>
+            </span>
+        </div>   
+        <div class="buyDiv">
+            <a href="#nowhere" class="buyLink" style="cursor:none"><button class="buyButton">购买商品请联系卖家QQ</button></a>
+        </div>
+    </div>
+</div>
+<div style="clear:both"></div>
+<%- include('footer') %>

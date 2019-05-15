@@ -7,7 +7,7 @@
     <div style="width:70px;height: 230px;float:left;">
         <a class="avatar avatar-link"
             href="/posts?author=<%= post.author._id %>"
-            data-title="<%= post.author.name %> | <%= ({m: '男', f: '女', x: '保密'})[post.author.gender] %>"
+            data-title="<%= post.author.name %> | <%= post.author.acade %>"
             data-content="<%= post.author.bio %>"
             
             >
@@ -17,7 +17,7 @@
     <div class="post-item-title"  style="width:600px;height:40px;float:left;">
         <h3><a href="/posts/<%= post._id %>">
             <% if(post.title.length < 20) {%>
-                <%= post.title%>
+                <%= post.title %>
             <% } else {%>
                 <%= post.title.slice(0, 20) + '...' %>
             <%}%>

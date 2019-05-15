@@ -1,0 +1,25 @@
+<div class="item-detail" >
+        <!-- 图片 -->
+        <a  href="/market/<%= item._id%>">
+            <img src="/img/<%= item.image %>" alt="" style="width: 178px;height:200px" class="item-image">
+        </a>
+        <!-- 描述 -->
+        <div>
+
+            <% if(item.subTitle.length > 15) {%>
+                <span class="item-subTitle"><%= item.subTitle.slice(0, 15) + '...' %></span>
+            <%} else {%>
+                <span class="item-subTitle"><%= item.subTitle %></span>
+            <%}%>
+            
+        </div>
+        <!-- 价格 -->
+        <span class="item-price">¥<%= item.price %></span>
+        
+        <!-- 头像 -->
+        <a  href="/market?author=<%= item.author._id %>"
+            data-title="<%= item.author.name %> | <%= item.author.acade %>"
+            data-content="<%= item.author.bio %>">
+            <img class="item-avatar" src="/img/<%= item.author.avatar %>" style="width:35px;height:35px;display:block;float: left;">
+        </a>
+</div>

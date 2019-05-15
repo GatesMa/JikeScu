@@ -1,0 +1,54 @@
+<%- include('header')%>
+
+<div class="ui grid">
+
+    <div class="four wide column">
+        <a  href="/posts?author=<%= user._id%>"
+            class="avatar avatar-link"
+            >
+            <img src="/img/<%= user.avatar %>" alt="" class="avatar" style="float:right">
+        </a>
+    </div>
+
+    <div class="eight wide column">
+
+        <!-- do something-->
+        <form class="ui form segment" method="POST" enctype="multipart/form-data">
+            <div class="field required">
+              <label>商品名称</label>
+              <input type="text" name="title" value="<%= item.name%>" >
+            </div>
+            <div class="field required">
+              <label>商品描述</label>
+              <textarea name="subtitle" rows="5" value="<%= item.subTitle%>"></textarea>
+            </div>
+            <div class="field required">
+              <label>商品价格(填写数字)</label>
+              <input type="number" name="price" value="<%= item.price%>">
+            </div>
+            <div class="field required">
+              <label>商品数量(填写数字)</label>
+              <input type="number" name="stock" value="<%= item.stock%>">
+            </div>
+            
+            <div class="field required">
+              <label>商品分类</label>
+              <select name="category" class="ui compact selection dropdown">
+                  
+                  <% for(var i in array){ %>
+                      <option value="<%= array[i] %>"><%= array[i] %></option>
+                  <%}%>
+                  
+              </select>
+            </div>
+            <div class="field required">
+              <label for="">商品主页展示图片（选择一张，其余多张详情图片在商品详情页添加</label>
+              <input type="file" name="image">
+            </div>
+            <input type="submit" class="ui button" value="发布">
+          </form>
+    </div>
+
+</div>
+
+<%- include('footer')%>

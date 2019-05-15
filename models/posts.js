@@ -57,7 +57,7 @@ module.exports = {
             .exec()
     }, 
     //按创建时间降序获取所有用户文章或者某个用户的所有文章
-    getPosts: function getPosts(author) {
+    getPosts: function getPosts(author, start, end) {
         const query = {}
         if(author) {
             query.author = author
@@ -66,6 +66,8 @@ module.exports = {
             .find(query)
             .populate({path: 'author', model: 'User'})
             .sort({_id: -1})
+            .skip(start)
+            .limit(end - start)
             .addCreatedAt()
             .addCommentsCount()
             .contentToHtml()
@@ -99,6 +101,16 @@ module.exports = {
     //通过用户Id获取文章数目
     getPostContById: function(authorId) {
         return Post.count({author: authorId}).exec() 
-    }
+    }, 
+    //获取所有文章数目
+    getPostsCount: function getPostsCount(author) {
+        const query = {}
+        if(author) {
+            query.author = author
+        }
+        return Post
+            .count(query)
+            .exec()
+    },
 }
 

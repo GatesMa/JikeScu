@@ -16,6 +16,43 @@
             <% posts.forEach(function(post){ %>
                 <%- include('components/post-item', {post: post})%>
             <% }) %>
+            <!-- 底部页码 -->
+            <div style="padding-top:10px">
+                
+                <button class="ui labeled icon button basic" style="width:180px" id="btn1">
+                    <i class="angle double left chevron icon"></i>
+                    
+                    <%if(author) {%>
+                        <a href="?author=<%= author %>&page=0">第一页</a>
+                    <%} else {%>
+                        <a href="?page=0">第一页</a>
+                    <%}%>
+                </button>
+                <button class="ui labeled icon button basic" style="width:180px" id="btn2">
+                    <i class="left chevron icon"></i>
+                    <%if(author) {%>
+                        <a href="?author=<%= author %>&page=<%= (parseInt(page)-1)%>">上一页</a>
+                    <%} else {%>
+                        <a href="?page=<%= (parseInt(page)-1)%>">上一页</a>
+                    <%}%>
+                </button>
+                <button class="ui right labeled icon button basic" style="width:180px" id="btn3">
+                    <%if(author) {%>
+                        <a href="?author=<%= author %>&page=<%= (parseInt(page)+1)%>">下一页</a>
+                    <%} else {%>
+                        <a href="?page=<%= (parseInt(page)+1)%>">下一页</a>
+                    <%}%>
+                    <i class="right chevron icon"></i>
+                </button>
+                <button class="ui right labeled icon button basic" style="width:180px" id="btn4">
+                    <%if(author) {%>
+                        <a href="?author=<%= author %>&page=<%= (posts.length / 5)%>">最后一页</a>
+                    <%} else {%>
+                        <a href="?page=<%= (parseInt(postsCont / 5))%>">最后一页</a>
+                    <%}%>
+                    <i class="angle double right chevron icon"></i>
+                </button>
+            </div>
         </div>
         <!-- 关注 -->
         <div class="guanzhu hidedisplay">
@@ -57,6 +94,7 @@
                 
             </div>
         </div>
+       
     </div>
     
     
@@ -76,7 +114,7 @@
                 </div>
                 <div class="nav-card1-item">
                     <i class="icon large cart arrow down"></i>
-                    <span>逛商场</span>
+                    <span><a href="/market" style="color:#444">逛商场</a></span>
                 </div>
                 <div class="nav-card1-item">
                     <i class="icon large share"></i>
@@ -94,7 +132,7 @@
                 </div>
                 <div class="nav-card2-item">
                     <i class="icon big book green"></i>
-                    <span>我的商店</span>
+                    <span><a href="/market?author=<%= userId%>" style="color:#444">我的商店</a></span>
                 </div>
                 <div class="nav-card2-item">
                     <i class="icon big server blue"></i>
@@ -104,9 +142,9 @@
                     <i class="icon big paint brush blue"></i>
                     <span>
                         <% if(userId == 0) {%>
-                            <a href="/signin" style="color:#444">我的消息</a>
+                            <a href="/signin" style="color:#444">我的主页</a>
                         <%} else {%>
-                            <a href="/posts?author=<%= userId %>" style="color:#444">我的消息</a>
+                            <a href="/posts?author=<%= userId %>" style="color:#444">我的主页</a>
                         <% } %>
                     </span> <!---->
                 </div>
@@ -160,6 +198,7 @@
                 <%= authorInfo.bio %>
             </div>
         </div>
+        
     <% } %>
     <div style="clear:both;"></div>
 </div>

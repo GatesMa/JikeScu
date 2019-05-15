@@ -1,0 +1,151 @@
+<%- include('header') %>
+
+<div style="width: 100%;">
+    
+    <div class="item-cons">
+        
+            
+        <div class="post-cons-nav">
+                <a class="nav-words0"><span class="spanclick">推荐</span></a>
+                <a class="nav-words1"><span >商品热度排行</span></a>
+        </div>
+    </div>
+
+    <div class="item-list">
+        <% items.forEach(function (item) { %>
+            <%- include('components/item-list', { item: item }) %>
+        <% }) %>
+    </div>
+
+    <div class="item-hot-rank hidedisplay">
+
+        <div class="ui middle aligned animated ordered list relaxed selection large">
+            
+            <% itemsPv.forEach(function(itempv){ %>   
+                <div class="item">
+                    <img class="ui avatar image" src="/img/<%= itempv.author.avatar %>">
+                    <div class="content">
+                        <div class="header"><a href="/market/<%= itempv._id %>"><%= itempv.name %></a></div>
+                        <div class="description">
+                            <% if(itempv.subTitle.length > 15) {%>
+                                <span ><%= itempv.subTitle.slice(0, 15) + '...' %></span>
+                            <%} else {%>
+                                <span ><%= itempv.subTitle %></span>
+                            <%}%>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="float: right">
+                            <span>浏览量：<%= itempv.pv%></span>
+                    </div>
+                    <img style="width:78px;height: 100px;float: right;display: block;margin-right:10px" src="/img/<%= itempv.image %>">
+                </div>
+                <div style="clear:both"></div>
+            <% }) %>
+        
+        </div>
+    </div>
+
+
+
+    <div class="post-sidebar">
+    
+        <!------------------------card1------------------------->
+        <div class="nav-card1">
+            <div class="nav-card1-item">
+                <i class="icon large pencil alternate outline"></i>
+                <a href="/posts/create"><span>写文章</span></a>
+            </div>
+            <div class="nav-card1-item">
+                <i class="icon large cart arrow down"></i>
+                <span>逛商场</span>
+            </div>
+            <div class="nav-card1-item">
+                <i class="icon large share"></i>
+                <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=47.102.121.0:3030" target="_blank">
+                    <span>趣分享</span>
+                </a>
+            </div>
+        </div>
+        <!------------------------card2------------------------->
+        <div class="nav-card2">
+            <div class="nav-card2-item">
+                <i class="icon big star half outline yellow"></i>
+                <span>我的收藏</span>
+            </div>
+            <div class="nav-card2-item">
+                <i class="icon big book green"></i>
+                <span>
+                    <% if(userId == 0) {%>
+                        <a href="/signin" style="color:#444">我的商店</a>
+                    <%} else {%>
+                        <a href="/market?author=<%= userId %>" style="color:#444">我的商店</a>
+                    <% } %>
+                </span>
+            </div>
+            
+            <div class="nav-card2-item">
+                <i class="icon big paint brush blue"></i>
+                <span>
+                    <% if(userId == 0) {%>
+                        <a href="/signin" style="color:#444">我的主页</a>
+                    <%} else {%>
+                        <a href="/posts?author=<%= userId %>" style="color:#444">我的主页</a>
+                    <% } %>
+                </span> <!---->
+            </div>
+            <div class="nav-card2-item">
+                <i class="icon big yen sign blue"></i>
+                <span>付费咨询</span>
+            </div>    
+            <div class="nav-card2-item">
+                <i class="icon big user secret blue"></i>
+                <span><a href="/market/create" style="color:#444">出售商品</a></span>
+            </div>    
+        </div>
+        <!------------------------card3------------------------->
+        <div class="nav-card3">
+            <a href="http://jwc.scu.edu.cn//article/197/197_1.htm" target="_blank">
+                <img style="width:296px" src="http://jwc.scu.edu.cn/images/party.png"  alt="广告">
+            </a>
+        </div>
+        <!------------------------card4------------------------->
+        <div class="nav-card4">
+            <span>四川大学计算机学院2017级行政二班</span>
+            <span style="border-bottom: 1px solid #f0f2f7;padding-bottom: 4px">马龙 · 祝生乾 · 吴朝 · 杨明月</span>
+            
+            <span>违法和不良信息举报：110</span>
+            <a href="#nowhere" class="license"><span>电信与服务业务经营许可证</span></a>
+            <a href="#nowhere" class="license"><span style="border-bottom: 1px solid #f0f2f7;padding-bottom: 4px">网络文化经营许可证</span></a>
+            
+            <a href="" class="contact"><span>联系我们</span></a>
+            <span> © 2019 即刻川大</span>
+        </div>
+    </div>
+
+</div>
+<div style="clear:both;"></div>
+
+<script>
+
+    $('.item-cons .nav-words0').click(function(){
+        $('.item-list').removeClass("hidedisplay");
+        $('.item-hot-rank').addClass("hidedisplay");
+        
+
+        $('.item-cons .nav-words0 span').addClass("spanclick");
+        $('.item-cons .nav-words1 span').removeClass("spanclick"); 
+    });
+
+    $('.item-cons .nav-words1').click(function(){
+        $('.item-hot-rank').removeClass("hidedisplay");
+        $('.item-list').addClass("hidedisplay");
+        
+
+        $('.item-cons .nav-words1 span').addClass("spanclick");
+        $('.item-cons .nav-words0 span').removeClass("spanclick"); 
+    });
+</script>
+
+<%- include('footer') %>
