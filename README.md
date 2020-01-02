@@ -5,7 +5,7 @@
 [Demo](http://gatesma.cn:3030)
 
 实例：
-博客页面：
+博客页面(博客详情页面好像有点问题，等我有时间修复)：
 <img src="http://gatesma.cn/myfile/img/JiKeSCU.png"/>
 
 商城页面：
